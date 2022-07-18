@@ -51,7 +51,6 @@ TECHPACK_AUDIO_UAPI_HEADERS="\
     sound/msmcal-hwdep.h\
     sound/voice_params.h\
     sound/wcd-dsp-glink.h\
-    linux/mfd/wcd9xxx/wcd9320_registers.h\
     linux/msm_audio_calibration.h\
     linux/msm_audio_wmapro.h\
     linux/msm_audio_amrwb.h\
@@ -61,7 +60,8 @@ TECHPACK_AUDIO_UAPI_HEADERS="\
     linux/msm_audio.h"
 
 TECHPACK_AUDIO_PACK_UAPI_HEADERS="\
-    audio/linux/mfd/wcd9xxx/wcd9xxx_registers.h"
+    wcd9320_registers.h\
+    wcd9xxx_registers.h"
 
 TECHPACK_CAMERA_UAPI_HEADERS="\
     camera/media/cam_cpas.h\
@@ -101,8 +101,7 @@ TECHPACK_DISPLAY_UAPI_HEADERS="\
     display/drm/sde_drm.h"
 
 TECHPACK_VIDEO_UAPI_HEADERS="\
-    media/msm_media_info.h\
-    media/msm_vidc_utils.h"
+    msm_media_info.h"
 
 HEADER_OVERRIDES="\
     linux/socket.h\
@@ -130,7 +129,7 @@ $CLEAN_HEADER -u -v -k $HEADER_ORI -d $HEADER_SAN $x &>>out/cp_headers_5.10.log
 done
 
 for x in $TECHPACK_AUDIO_PACK_UAPI_HEADERS; do \
-cp $HEADER_SRC/"../techpack/audio/include/uapi/"$x $HEADER_ORI/$x
+cp $HEADER_SRC/"../techpack/audio/include/asoc/"$x $HEADER_ORI/audio/linux/mfd/wcd9xxx/$x
 $CLEAN_HEADER -u -v -k $HEADER_ORI -d $HEADER_SAN $x &>>out/cp_headers_5.10.log
 done
 
@@ -145,7 +144,7 @@ $CLEAN_HEADER -u -v -k $HEADER_ORI -d $HEADER_SAN $x &>>out/cp_headers_5.10.log
 done
 
 for x in $TECHPACK_VIDEO_UAPI_HEADERS; do \
-cp $HEADER_SRC/"../techpack/video/include/uapi/vidc/"$x $HEADER_ORI/$x
+cp $HEADER_SRC/"../techpack/video/driver/vidc/inc/"$x $HEADER_ORI/media/$x
 $CLEAN_HEADER -u -v -k $HEADER_ORI -d $HEADER_SAN $x &>>out/cp_headers_5.10.log
 done
 
