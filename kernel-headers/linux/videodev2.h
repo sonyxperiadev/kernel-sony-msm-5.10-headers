@@ -18,7 +18,7 @@
  ****************************************************************************/
 #ifndef _UAPI__LINUX_VIDEODEV2_H
 #define _UAPI__LINUX_VIDEODEV2_H
-#include <sys/time.h>
+#include <linux/time.h>
 #include <linux/compiler.h>
 #include <linux/ioctl.h>
 #include <linux/types.h>
