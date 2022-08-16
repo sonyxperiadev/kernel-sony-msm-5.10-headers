@@ -33,6 +33,7 @@ UAPI_HEADERS="\
     linux/socket.h\
     linux/qseecom.h\
     linux/spcom.h\
+    linux/smcinvoke.h\
     linux/v4l2-common.h\
     linux/v4l2-controls.h\
     linux/v4l2-mediabus.h\
