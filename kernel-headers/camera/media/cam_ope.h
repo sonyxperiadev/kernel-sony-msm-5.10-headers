@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef __UAPI_OPE_H__
 #define __UAPI_OPE_H__
 #include <media/cam_defs.h>
@@ -59,7 +47,7 @@
 #define OPE_MAX_IO_BUFS (OPE_OUT_RES_MAX + OPE_IN_RES_MAX)
 #define OPE_MAX_PASS 1
 #define OPE_MAX_PLANES 2
-#define OPE_MAX_STRIPES 48
+#define OPE_MAX_STRIPES 64
 #define OPE_MAX_BATCH_SIZE 16
 struct ope_stripe_info {
   __u32 offset;

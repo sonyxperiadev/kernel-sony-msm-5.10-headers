@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef _UAPI_LSM_PARAMS_H__
 #define _UAPI_LSM_PARAMS_H__
 #define LSM_POLLING_ENABLE_SUPPORT
@@ -90,7 +78,7 @@ struct snd_lsm_det_event_type {
   __u32 mode;
 };
 struct snd_lsm_sound_model_v2 {
-  __u8 __user * data;
+  __u8  * data;
   __u8 * confidence_level;
   __u32 data_size;
   enum lsm_detection_mode detection_mode;
@@ -135,21 +123,21 @@ struct lsm_params_info {
   __u32 module_id;
   __u32 param_id;
   __u32 param_size;
-  __u8 __user * param_data;
+  __u8  * param_data;
   __u32 param_type;
 };
 struct lsm_params_info_v2 {
   __u32 module_id;
   __u32 param_id;
   __u32 param_size;
-  __u8 __user * param_data;
+  __u8  * param_data;
   __u32 param_type;
   __u16 instance_id;
   __u16 stage_idx;
   __u32 model_id;
 };
 struct snd_lsm_module_params {
-  __u8 __user * params;
+  __u8  * params;
   __u32 num_params;
   __u32 data_size;
 };
@@ -163,7 +151,7 @@ struct snd_lsm_input_hw_params {
   __u32 sample_rate;
   __u16 bit_width;
   __u16 num_channels;
-} __packed;
+} __attribute__((__packed__));
 struct lsm_params_get_info {
   __u32 module_id;
   __u16 instance_id;
@@ -173,7 +161,7 @@ struct lsm_params_get_info {
   __u32 param_type;
   __u16 stage_idx;
   __u8 payload[0];
-} __packed;
+} __attribute__((__packed__));
 #define SNDRV_LSM_DEREG_SND_MODEL _IOW('U', 0x01, int)
 #define SNDRV_LSM_EVENT_STATUS _IOW('U', 0x02, struct snd_lsm_event_status)
 #define SNDRV_LSM_ABORT_EVENT _IOW('U', 0x03, int)

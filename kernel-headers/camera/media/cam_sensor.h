@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef __UAPI_CAM_SENSOR_H__
 #define __UAPI_CAM_SENSOR_H__
 #include <linux/types.h>
@@ -28,6 +16,9 @@
 #define CAM_SENSOR_NAME_MAX_SIZE 32
 #define SKEW_CAL_MASK BIT(1)
 #define PREAMBLE_PATTEN_CAL_MASK BIT(2)
+#define CAM_SENSOR_GET_QUERY_CAP_V2
+#define CAM_SENSOR_PACKET_GENERIC_BLOB 1
+#define CAM_SENSOR_GENERIC_BLOB_RES_INFO 0
 enum camera_sensor_cmd_type {
   CAMERA_SENSOR_CMD_TYPE_INVALID,
   CAMERA_SENSOR_CMD_TYPE_PROBE,
@@ -97,7 +88,10 @@ enum cam_sensor_packet_opcodes {
   CAM_SENSOR_PACKET_OPCODE_SENSOR_READ,
   CAM_SENSOR_PACKET_OPCODE_SENSOR_FRAME_SKIP_UPDATE,
   CAM_SENSOR_PACKET_OPCODE_SENSOR_PROBE_V2,
-  CAM_SENSOR_PACKET_OPCODE_SENSOR_NOP = 127
+  CAM_SENSOR_PACKET_OPCODE_SENSOR_REG_BANK_UNLOCK,
+  CAM_SENSOR_PACKET_OPCODE_SENSOR_REG_BANK_LOCK,
+  CAM_SENSOR_PACKET_OPCODE_SENSOR_RESCONFIG = 126,
+  CAM_SENSOR_PACKET_OPCODE_SENSOR_NOP = 127,
 };
 enum tpg_command_type_t {
   TPG_CMD_TYPE_INVALID = 0,
@@ -436,4 +430,24 @@ struct cam_flash_query_cap_info {
   __u32 max_duration_flash[CAM_FLASH_MAX_LED_TRIGGERS];
   __u32 max_current_torch[CAM_FLASH_MAX_LED_TRIGGERS];
 } __attribute__((packed));
+struct cam_flash_query_cap_info_v2 {
+  __u32 version;
+  __u32 slot_info;
+  __u32 max_current_flash[CAM_FLASH_MAX_LED_TRIGGERS];
+  __u32 max_duration_flash[CAM_FLASH_MAX_LED_TRIGGERS];
+  __u32 max_current_torch[CAM_FLASH_MAX_LED_TRIGGERS];
+  __u32 flash_type;
+  __u32 num_valid_params;
+  __u32 param_mask;
+  __u32 params[3];
+} __attribute__((packed));
+struct cam_sensor_res_info {
+  __u32 version;
+  __u16 res_index;
+  __u16 num_batched_frames;
+  __u32 num_valid_params;
+  __u32 valid_param_mask;
+  __u16 params[4];
+} __attribute__((packed));
+#define VIDIOC_MSM_CCI_CFG _IOWR('V', BASE_VIDIOC_PRIVATE + 23, struct cam_cci_ctrl)
 #endif

@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef _UAPI_MSM_RMNET_H_
 #define _UAPI_MSM_RMNET_H_
 #include <linux/types.h>
@@ -69,6 +57,10 @@
 #define RMNET_IOCTL_SET_MTU 0x0020
 #define RMNET_IOCTL_GET_EPID_LL 0x0021
 #define RMNET_IOCTL_GET_EP_PAIR_LL 0x0022
+#define RMNET_IOCTL_SET_ETH_VLAN 0x0023
+#define RMNET_IOCTL_ADD_MUX_CHANNEL_v2 0x0024
+#define RMNET_IOCTL_GET_EPID_ETH 0x0025
+#define RMNET_IOCTL_GET_EP_PAIR_ETH 0x0026
 #define RMNET_IOCTL_SET_EGRESS_DATA_FORMAT_V2 0x0000
 #define RMNET_IOCTL_SET_INGRESS_DATA_FORMAT_V2 0x0001
 #define RMNET_IOCTL_FEAT_NOTIFY_MUX_CHANNEL (1 << 0)
@@ -81,26 +73,31 @@
 #define RMNET_IOCTL_FEAT_FLOW_CONTROL (1 << 7)
 #define RMNET_IOCTL_FEAT_GET_DFLT_CONTROL_CHANNEL (1 << 8)
 #define RMNET_IOCTL_FEAT_GET_HWSW_MAP (1 << 9)
+#define RMNET_IOCTL_FEAT_ETH_PDU (1 << 10)
 #define RMNET_IOCTL_EGRESS_FORMAT_MAP (1 << 1)
 #define RMNET_IOCTL_EGRESS_FORMAT_AGGREGATION (1 << 2)
 #define RMNET_IOCTL_EGRESS_FORMAT_MUXING (1 << 3)
 #define RMNET_IOCTL_EGRESS_FORMAT_CHECKSUM (1 << 4)
+#define RMNET_IOCTL_EGRESS_FORMAT_IP_ROUTE (1 << 5)
 #define RMNET_IOCTL_INGRESS_FORMAT_MAP (1 << 1)
 #define RMNET_IOCTL_INGRESS_FORMAT_DEAGGREGATION (1 << 2)
 #define RMNET_IOCTL_INGRESS_FORMAT_DEMUXING (1 << 3)
 #define RMNET_IOCTL_INGRESS_FORMAT_CHECKSUM (1 << 4)
 #define RMNET_IOCTL_INGRESS_FORMAT_AGG_DATA (1 << 5)
+#define RMNET_IOCTL_INGRESS_FORMAT_IP_ROUTE (1 << 6)
 #define RMNET_IOCTL_OFFLOAD_FORMAT_NONE (0)
 #define RMNET_IOCTL_COALESCING_FORMAT_TCP (1 << 0)
 #define RMNET_IOCTL_COALESCING_FORMAT_UDP (1 << 1)
 #ifndef IFNAMSIZ
 #define IFNAMSIZ 16
 #endif
+#define MAC_ADDR_SIZE 6
 enum rmnet_egress_ep_type {
   RMNET_EGRESS_DEFAULT = 0x0000,
   RMNET_EGRESS_LOW_LAT_CTRL = 0x0001,
   RMNET_EGRESS_LOW_LAT_DATA = 0x0002,
-  RMNET_EGRESS_MAX = 0x0003,
+  RMNET_EGRESS_ETH_DATA = 0x0003,
+  RMNET_EGRESS_MAX = 0x0004,
 };
 enum rmnet_ingress_ep_type {
   RMNET_INGRESS_COALS = 0x0000,
@@ -182,6 +179,11 @@ struct rmnet_ioctl_extended_s {
       __u16 mtu_v4;
       __u16 mtu_v6;
     } mtu_params;
+    struct {
+      __u32 mux_id;
+      __s8 vchannel_name[IFNAMSIZ];
+      __u8 mac[MAC_ADDR_SIZE];
+    } rmnet_mux_val_v2;
   } u;
 };
 struct rmnet_ioctl_data_s {

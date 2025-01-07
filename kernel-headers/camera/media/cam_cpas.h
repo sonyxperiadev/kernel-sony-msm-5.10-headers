@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef __UAPI_CAM_CPAS_H__
 #define __UAPI_CAM_CPAS_H__
 #include <media/cam_defs.h>
@@ -66,6 +54,7 @@
 #define CAM_AXI_PATH_DATA_CRE_MAX_OFFSET (CAM_AXI_PATH_DATA_CRE_START_OFFSET + 31)
 #define CAM_AXI_PATH_DATA_ALL 256
 #define CAM_CPAS_FUSES_MAX 32
+#define CAM_SYSFS_SUBPARTS_INFO_FILENAME "subparts_info"
 struct cam_cpas_fuse_value {
   __u32 fuse_id;
   __u32 fuse_val;

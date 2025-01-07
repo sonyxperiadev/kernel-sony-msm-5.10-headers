@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
 /*
  * Copyright (c) 2018-2021, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #ifndef _UAPI_MSM_KGSL_H
@@ -12,7 +13,7 @@
 /*
  * The KGSL version has proven not to be very useful in userspace if features
  * are cherry picked into other trees out of order so it is frozen as of 3.14.
- * It is left here for backwards compatabilty and as a reminder that
+ * It is left here for backward compatibility and as a reminder that
  * software releases are never linear. Also, I like pie.
  */
 
@@ -74,6 +75,7 @@
 #define KGSL_CONTEXT_TYPE_UNKNOWN	0x1E
 
 #define KGSL_CONTEXT_INVALIDATE_ON_FAULT 0x10000000
+#define KGSL_CONTEXT_LPAC 0x20000000
 #define KGSL_CONTEXT_FAULT_INFO	  0x40000000
 
 #define KGSL_CONTEXT_INVALID 0xffffffff
@@ -100,6 +102,9 @@
 #define KGSL_CMDBATCH_SYNC		KGSL_CONTEXT_SYNC           /* 0x400 */
 #define KGSL_CMDBATCH_PWR_CONSTRAINT	KGSL_CONTEXT_PWR_CONSTRAINT /* 0x800 */
 #define KGSL_CMDBATCH_SPARSE	    0x1000 /* 0x1000 */
+/* RECURRING bits must be set for LSR workload with IOCTL_KGSL_RECURRING_COMMAND. */
+#define KGSL_CMDBATCH_START_RECURRING	0x00100000
+#define KGSL_CMDBATCH_STOP_RECURRING	0x00200000
 
 /*
  * Reserve bits [16:19] and bits [28:31] for possible bits shared between
@@ -194,7 +199,7 @@ enum kgsl_user_mem_type {
 	KGSL_USER_MEM_TYPE_ADDR		= 0x00000002,
 	KGSL_USER_MEM_TYPE_ION		= 0x00000003,
 	/*
-	 * ION type is retained for backwards compatibility but Ion buffers are
+	 * ION type is retained for backward compatibility but ION buffers are
 	 * dma-bufs so try to use that naming if we can
 	 */
 	KGSL_USER_MEM_TYPE_DMABUF       = 0x00000003,
@@ -345,6 +350,7 @@ enum kgsl_timestamp_type {
 #define KGSL_PROP_CONTEXT_PROPERTY	0x28
 #define KGSL_PROP_GPU_MODEL		0x29
 #define KGSL_PROP_VK_DEVICE_ID		0x2A
+#define KGSL_PROP_IS_LPAC_ENABLED	0x2B
 
 /*
  * kgsl_capabilities_properties returns a list of supported properties.
@@ -976,7 +982,7 @@ struct kgsl_gpumem_sync_cache {
 #define KGSL_GPUMEM_CACHE_FLUSH \
 	(KGSL_GPUMEM_CACHE_CLEAN | KGSL_GPUMEM_CACHE_INV)
 
-/* Flag to ensure backwards compatibility of kgsl_gpumem_sync_cache struct */
+/* Flag to ensure backward compatibility of kgsl_gpumem_sync_cache struct */
 #define KGSL_GPUMEM_CACHE_RANGE (1 << 31U)
 
 #define IOCTL_KGSL_GPUMEM_SYNC_CACHE \
@@ -1033,8 +1039,8 @@ struct kgsl_perfcounter_put {
 /**
  * struct kgsl_perfcounter_query - argument to IOCTL_KGSL_PERFCOUNTER_QUERY
  * @groupid: Performance counter group ID
- * @countable: Return active countables array
- * @size: Size of active countables array
+ * @countables: Return active countables array
+ * @count: Number of entries in @countables
  * @max_counters: Return total number counters for the group ID
  *
  * Query the available performance counters given a groupid.  The array
@@ -1061,11 +1067,10 @@ struct kgsl_perfcounter_query {
 	_IOWR(KGSL_IOC_TYPE, 0x3A, struct kgsl_perfcounter_query)
 
 /**
- * struct kgsl_perfcounter_query - argument to IOCTL_KGSL_PERFCOUNTER_QUERY
+ * struct kgsl_perfcounter_read_group - argument to IOCTL_KGSL_PERFCOUNTER_QUERY
  * @groupid: Performance counter group IDs
  * @countable: Performance counter countable IDs
  * @value: Return performance counter reads
- * @size: Size of all arrays (groupid/countable pair and return value)
  *
  * Read in the current value of a performance counter given by the groupid
  * and countable.
@@ -1505,18 +1510,18 @@ struct kgsl_command_syncpoint {
 };
 
 /**
- * struct kgsl_command_object - Argument for IOCTL_KGSL_GPU_COMMAND
+ * struct kgsl_gpu_command - Argument for IOCTL_KGSL_GPU_COMMAND
  * @flags: Current flags for the object
  * @cmdlist: List of kgsl_command_objects for submission
- * @cmd_size: Size of kgsl_command_objects structure
+ * @cmdsize: Size of kgsl_command_objects structure
  * @numcmds: Number of kgsl_command_objects in command list
  * @objlist: List of kgsl_command_objects for tracking
- * @obj_size: Size of kgsl_command_objects structure
+ * @objsize: Size of kgsl_command_objects structure
  * @numobjs: Number of kgsl_command_objects in object list
  * @synclist: List of kgsl_command_syncpoints
- * @sync_size: Size of kgsl_command_syncpoint structure
+ * @syncsize: Size of kgsl_command_syncpoint structure
  * @numsyncs: Number of kgsl_command_syncpoints in syncpoint list
- * @context_id: Context ID submittin ghte kgsl_gpu_command
+ * @context_id: Context ID submitting the kgsl_gpu_command
  * @timestamp: Timestamp for the submitted commands
  */
 struct kgsl_gpu_command {
@@ -1813,7 +1818,7 @@ struct kgsl_gpu_aux_command_bind {
 };
 
 /**
- * struct kgsl_aux_command_generic - Container for an AUX command
+ * struct kgsl_gpu_aux_command_generic - Container for an AUX command
  * @priv: Pointer to the type specific buffer
  * @size: Size of the type specific buffer
  * @type: type of sync point defined here
@@ -1838,7 +1843,7 @@ struct kgsl_gpu_aux_command_generic {
  * @synclist: List of &struct kgsl_command_syncpoint objects
  * @syncsize: Size of each entry in @synclist
  * @numsyncs: Number of entries in @synclist
- * @context_id: ID of the context submtting the aux command
+ * @context_id: ID of the context submitting the aux command
  * @timestamp: Timestamp for the command submission
  *
  * Describe a GPU auxiliary command. Auxiliary commands are tasks that are not
@@ -1994,7 +1999,7 @@ struct kgsl_timeline_fence_get {
  * @timelines_size: The size of each element in @timelines
  *
  * An aux command for timeline signals that can be pointed to by
- * &struct kgsl_aux_command_generic when the type is
+ * &struct kgsl_gpu_aux_command_generic when the type is
  * KGSL_GPU_AUX_COMMAND_TIMELINE.
  */
 struct kgsl_gpu_aux_command_timeline {
@@ -2086,5 +2091,32 @@ struct kgsl_fault_report {
 
 #define IOCTL_KGSL_GET_FAULT_REPORT \
 	_IOWR(KGSL_IOC_TYPE, 0x5E, struct kgsl_fault_report)
+
+/**
+ * struct kgsl_recurring_object - Argument for IOCTL_KGSL_RECURRING_COMMAND
+ * @flags: Current flags for the object
+ * @cmdlist: List of kgsl_command_objects for submission
+ * @cmd_size: Size of kgsl_command_objects structure
+ * @numcmds: Number of kgsl_command_objects in command list
+ * @objlist: List of kgsl_command_objects for tracking
+ * @obj_size: Size of kgsl_command_objects structure
+ * @numobjs: Number of kgsl_command_objects in object list
+ * @context_id: Context ID submitting the kgsl_recurring_command
+ */
+struct kgsl_recurring_command {
+	__u64 flags;
+	__u64 __user cmdlist;
+	__u32 cmdsize;
+	__u32 numcmds;
+	__u64 __user objlist;
+	__u32 objsize;
+	__u32 numobjs;
+	__u32 context_id;
+	/* private: Padding for 64 bit compatibility */
+	__u32 padding;
+};
+
+#define IOCTL_KGSL_RECURRING_COMMAND \
+	_IOWR(KGSL_IOC_TYPE, 0x5F, struct kgsl_recurring_command)
 
 #endif /* _UAPI_MSM_KGSL_H */

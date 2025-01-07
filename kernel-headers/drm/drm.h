@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef _DRM_H_
 #define _DRM_H_
 #ifdef __linux__
@@ -78,19 +66,19 @@ struct drm_version {
   int version_minor;
   int version_patchlevel;
   __kernel_size_t name_len;
-  char __user * name;
+  char  * name;
   __kernel_size_t date_len;
-  char __user * date;
+  char  * date;
   __kernel_size_t desc_len;
-  char __user * desc;
+  char  * desc;
 };
 struct drm_unique {
   __kernel_size_t unique_len;
-  char __user * unique;
+  char  * unique;
 };
 struct drm_list {
   int count;
-  struct drm_version __user * version;
+  struct drm_version  * version;
 };
 struct drm_block {
   int unused;
@@ -202,37 +190,37 @@ struct drm_buf_desc {
 };
 struct drm_buf_info {
   int count;
-  struct drm_buf_desc __user * list;
+  struct drm_buf_desc  * list;
 };
 struct drm_buf_free {
   int count;
-  int __user * list;
+  int  * list;
 };
 struct drm_buf_pub {
   int idx;
   int total;
   int used;
-  void __user * address;
+  void  * address;
 };
 struct drm_buf_map {
   int count;
 #ifdef __cplusplus
-  void __user * virt;
+  void  * virt;
 #else
-  void __user * __linux_virtual;
+  void  * __linux_virtual;
 #endif
-  struct drm_buf_pub __user * list;
+  struct drm_buf_pub  * list;
 };
 struct drm_dma {
   int context;
   int send_count;
-  int __user * send_indices;
-  int __user * send_sizes;
+  int  * send_indices;
+  int  * send_sizes;
   enum drm_dma_flags flags;
   int request_count;
   int request_size;
-  int __user * request_indices;
-  int __user * request_sizes;
+  int  * request_indices;
+  int  * request_sizes;
   int granted_count;
 };
 enum drm_ctx_flags {
@@ -245,7 +233,7 @@ struct drm_ctx {
 };
 struct drm_ctx_res {
   int count;
-  struct drm_ctx __user * contexts;
+  struct drm_ctx  * contexts;
 };
 struct drm_draw {
   drm_drawable_t handle;

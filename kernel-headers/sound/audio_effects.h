@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef _AUDIO_EFFECTS_H
 #define _AUDIO_EFFECTS_H
 #include <linux/types.h>
@@ -259,7 +247,7 @@ struct pbe_config_t {
   __s32 p1BandPassCoeffs[5 * 3];
   __s32 p1BassShelfCoeffs[5];
   __s32 p1TrebleShelfCoeffs[5];
-} __packed;
+} __attribute__((__packed__));
 struct pbe_params {
   __u32 device;
   __u32 enable_flag;

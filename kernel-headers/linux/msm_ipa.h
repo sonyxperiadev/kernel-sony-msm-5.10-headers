@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef _UAPI_MSM_IPA_H_
 #define _UAPI_MSM_IPA_H_
 #include <stdio.h>
@@ -124,6 +112,9 @@
 #define IPA_IOCTL_SET_IPPT_SW_FLT 90
 #define IPA_IOCTL_ADD_MACSEC_MAPPING 92
 #define IPA_IOCTL_DEL_MACSEC_MAPPING 93
+#define IPA_IOCTL_QUERY_CACHED_DRIVER_MSG 94
+#define IPA_IOCTL_SET_EXT_ROUTER_MODE 95
+#define IPA_IOCTL_ADD_DEL_DSCP_PCP_MAPPING 96
 #define IPA_HDR_MAX_SIZE 64
 #define IPA_RESOURCE_NAME_MAX 32
 #define IPA_NUM_PROPS_MAX 35
@@ -140,6 +131,7 @@
 #define IPA_FLT_RT_SW_COUNTER (IPA_MAX_FLT_RT_CNT_INDEX - IPA_FLT_RT_HW_COUNTER)
 #define IPA_MAX_FLT_RT_CLIENTS 60
 #define IPA_MAX_IPPT_NUM_PORT_FLT 5
+#define IPA_UC_MAX_DSCP_VAL 64
 #define IPA_CV2X_SUPPORT
 #define IPA_FLT_TOS (1ul << 0)
 #define IPA_FLT_PROTOCOL (1ul << 1)
@@ -222,6 +214,7 @@ enum ipa_client_type {
   IPA_CLIENT_WLAN2_CONS = 13,
   IPA_CLIENT_WLAN3_PROD = 14,
   IPA_CLIENT_WLAN3_CONS = 15,
+  IPA_CLIENT_WLAN2_PROD1 = 16,
   IPA_CLIENT_WLAN4_CONS = 17,
   IPA_CLIENT_USB_PROD = 18,
   IPA_CLIENT_USB_CONS = 19,
@@ -246,6 +239,7 @@ enum ipa_client_type {
   IPA_CLIENT_A5_LAN_WAN_CONS = 37,
   IPA_CLIENT_ODU_PROD = 38,
   IPA_CLIENT_ODU_EMB_CONS = 39,
+  IPA_CLIENT_WLAN3_PROD1 = 40,
   IPA_CLIENT_ODU_TETH_CONS = 41,
   IPA_CLIENT_MHI_PROD = 42,
   IPA_CLIENT_MHI_CONS = 43,
@@ -296,6 +290,7 @@ enum ipa_client_type {
   IPA_CLIENT_MHI_PRIME_RMNET_PROD = 98,
   IPA_CLIENT_MHI_PRIME_RMNET_CONS = 99,
   IPA_CLIENT_MHI_PRIME_DPL_PROD = 100,
+  IPA_CLIENT_MHI_COAL_CONS = 101,
   IPA_CLIENT_AQC_ETHERNET_PROD = 102,
   IPA_CLIENT_AQC_ETHERNET_CONS = 103,
   IPA_CLIENT_APPS_WAN_LOW_LAT_PROD = 104,
@@ -317,8 +312,10 @@ enum ipa_client_type {
   IPA_CLIENT_APPS_WAN_LOW_LAT_DATA_CONS = 121,
   IPA_CLIENT_Q6_DL_NLO_LL_DATA_PROD = 122,
   IPA_CLIENT_TPUT_CONS = 125,
+  IPA_CLIENT_Q6_DL_NLO_ETH_DATA_PROD = 126,
+  IPA_CLIENT_APPS_WAN_ETH_PROD = 128,
 };
-#define IPA_CLIENT_MAX (IPA_CLIENT_TPUT_CONS + 1)
+#define IPA_CLIENT_MAX (IPA_CLIENT_APPS_WAN_ETH_PROD + 1)
 #define IPA_CLIENT_WLAN2_PROD IPA_CLIENT_A5_WLAN_AMPDU_PROD
 #define IPA_CLIENT_Q6_DL_NLO_DATA_PROD IPA_CLIENT_Q6_DL_NLO_DATA_PROD
 #define IPA_CLIENT_Q6_UL_NLO_ACK_CONS IPA_CLIENT_Q6_UL_NLO_ACK_CONS
@@ -345,8 +342,11 @@ enum ipa_client_type {
 #define IPA_CLIENT_APPS_WAN_LOW_LAT_DATA_PROD IPA_CLIENT_APPS_WAN_LOW_LAT_DATA_PROD
 #define IPA_CLIENT_APPS_WAN_LOW_LAT_DATA_CONS IPA_CLIENT_APPS_WAN_LOW_LAT_DATA_CONS
 #define IPA_CLIENT_Q6_DL_NLO_LL_DATA_PROD IPA_CLIENT_Q6_DL_NLO_LL_DATA_PROD
+#define IPA_CLIENT_WLAN2_PROD1 IPA_CLIENT_WLAN2_PROD1
+#define IPA_CLIENT_WLAN3_PROD1 IPA_CLIENT_WLAN3_PROD1
+#define IPA_CLIENT_MHI_COAL_CONS IPA_CLIENT_MHI_COAL_CONS
 #define IPA_CLIENT_IS_APPS_CONS(client) ((client) == IPA_CLIENT_APPS_LAN_CONS || (client) == IPA_CLIENT_APPS_WAN_CONS || (client) == IPA_CLIENT_APPS_WAN_COAL_CONS || (client) == IPA_CLIENT_APPS_WAN_LOW_LAT_CONS || (client) == IPA_CLIENT_APPS_WAN_LOW_LAT_DATA_CONS)
-#define IPA_CLIENT_IS_APPS_PROD(client) ((client) == IPA_CLIENT_APPS_LAN_PROD || (client) == IPA_CLIENT_APPS_WAN_PROD || (client) == IPA_CLIENT_APPS_WAN_LOW_LAT_PROD || (client) == IPA_CLIENT_APPS_WAN_LOW_LAT_DATA_PROD)
+#define IPA_CLIENT_IS_APPS_PROD(client) ((client) == IPA_CLIENT_APPS_LAN_PROD || (client) == IPA_CLIENT_APPS_WAN_PROD || (client) == IPA_CLIENT_APPS_WAN_LOW_LAT_PROD || (client) == IPA_CLIENT_APPS_WAN_LOW_LAT_DATA_PROD || (client) == IPA_CLIENT_APPS_WAN_ETH_PROD)
 #define IPA_CLIENT_IS_USB_CONS(client) ((client) == IPA_CLIENT_USB_CONS || (client) == IPA_CLIENT_USB2_CONS || (client) == IPA_CLIENT_USB3_CONS || (client) == IPA_CLIENT_USB_DPL_CONS || (client) == IPA_CLIENT_USB4_CONS)
 #define IPA_CLIENT_IS_WAN_CONS(client) ((client) == IPA_CLIENT_APPS_WAN_CONS || (client) == IPA_CLIENT_APPS_WAN_COAL_CONS)
 #define IPA_CLIENT_IS_LOW_LAT_CONS(client) ((client) == IPA_CLIENT_APPS_WAN_LOW_LAT_CONS)
@@ -360,7 +360,7 @@ enum ipa_client_type {
 #define IPA_CLIENT_IS_Q6_ZIP_PROD(client) ((client) == IPA_CLIENT_Q6_DECOMP_PROD || (client) == IPA_CLIENT_Q6_DECOMP2_PROD)
 #define IPA_CLIENT_IS_MEMCPY_DMA_CONS(client) ((client) == IPA_CLIENT_MEMCPY_DMA_SYNC_CONS || (client) == IPA_CLIENT_MEMCPY_DMA_ASYNC_CONS)
 #define IPA_CLIENT_IS_MEMCPY_DMA_PROD(client) ((client) == IPA_CLIENT_MEMCPY_DMA_SYNC_PROD || (client) == IPA_CLIENT_MEMCPY_DMA_ASYNC_PROD)
-#define IPA_CLIENT_IS_MHI(client) ((client) == IPA_CLIENT_MHI_CONS || (client) == IPA_CLIENT_MHI_PROD || (client) == IPA_CLIENT_MHI2_PROD || (client) == IPA_CLIENT_MHI2_CONS || (client) == IPA_CLIENT_MHI_DPL_CONS || (client) == IPA_CLIENT_MHI_LOW_LAT_CONS || (client) == IPA_CLIENT_MHI_LOW_LAT_PROD || (client) == IPA_CLIENT_MHI_QDSS_CONS)
+#define IPA_CLIENT_IS_MHI(client) ((client) == IPA_CLIENT_MHI_CONS || (client) == IPA_CLIENT_MHI_PROD || (client) == IPA_CLIENT_MHI2_PROD || (client) == IPA_CLIENT_MHI2_CONS || (client) == IPA_CLIENT_MHI_DPL_CONS || (client) == IPA_CLIENT_MHI_LOW_LAT_CONS || (client) == IPA_CLIENT_MHI_LOW_LAT_PROD || (client) == IPA_CLIENT_MHI_QDSS_CONS || (client) == IPA_CLIENT_MHI_COAL_CONS)
 #define IPA_CLIENT_IS_TEST_PROD(client) ((client) == IPA_CLIENT_TEST_PROD || (client) == IPA_CLIENT_TEST1_PROD || (client) == IPA_CLIENT_TEST2_PROD || (client) == IPA_CLIENT_TEST3_PROD || (client) == IPA_CLIENT_TEST4_PROD)
 #define IPA_CLIENT_IS_TEST_CONS(client) ((client) == IPA_CLIENT_TEST_CONS || (client) == IPA_CLIENT_TEST1_CONS || (client) == IPA_CLIENT_TEST2_CONS || (client) == IPA_CLIENT_TEST3_CONS || (client) == IPA_CLIENT_TEST4_CONS)
 #define IPA_CLIENT_IS_TEST(client) (IPA_CLIENT_IS_TEST_PROD(client) || IPA_CLIENT_IS_TEST_CONS(client))
@@ -373,7 +373,10 @@ enum ipa3_nat_mem_in {
 enum ipa_ip_type {
   IPA_IP_v4,
   IPA_IP_v6,
-  IPA_IP_MAX
+  IPA_IP_MAX,
+  IPA_IP_v4_VLAN = IPA_IP_MAX,
+  IPA_IP_v6_VLAN,
+  IPA_IP_MAX_WLAN
 };
 #define VALID_IPA_IP_TYPE(t) ((t) >= IPA_IP_v4 && (t) < IPA_IP_MAX)
 enum ipa_rule_type {
@@ -531,7 +534,22 @@ enum ipa_macsec_event {
   IPA_MACSEC_EVENT_MAX
 #define IPA_MACSEC_EVENT_MAX IPA_MACSEC_EVENT_MAX
 };
-#define IPA_EVENT_MAX_NUM (IPA_MACSEC_EVENT_MAX)
+enum ipa_done_restore_event {
+  IPA_DONE_RESTORE_EVENT = IPA_MACSEC_EVENT_MAX,
+  IPA_DONE_RESTORE_EVENT_MAX
+#define IPA_DONE_RESTORE_EVENT_MAX IPA_DONE_RESTORE_EVENT_MAX
+};
+enum ipa_ext_route_evt {
+  IPA_SET_EXT_ROUTER_MODE_EVENT = IPA_DONE_RESTORE_EVENT_MAX,
+  IPA_SET_EXT_ROUTER_MODE_EVENT_MAX
+#define IPA_SET_EXT_ROUTER_MODE_EVENT_MAX IPA_SET_EXT_ROUTER_MODE_EVENT_MAX
+};
+enum ipa_eth_pdu_evt {
+  IPA_ENABLE_ETH_PDU_MODE_EVENT = IPA_SET_EXT_ROUTER_MODE_EVENT_MAX,
+  IPA_ENABLE_ETH_PDU_MODE_EVENT_MAX
+#define IPA_ENABLE_ETH_PDU_MODE_EVENT_MAX IPA_ENABLE_ETH_PDU_MODE_EVENT_MAX
+};
+#define IPA_EVENT_MAX_NUM (IPA_ENABLE_ETH_PDU_MODE_EVENT_MAX)
 #define IPA_EVENT_MAX ((int) IPA_EVENT_MAX_NUM)
 enum ipa_rm_resource_name {
   IPA_RM_RESOURCE_Q6_PROD = 0,
@@ -578,8 +596,9 @@ enum ipa_hw_type {
   IPA_HW_v4_11 = 20,
   IPA_HW_v5_0 = 21,
   IPA_HW_v5_1 = 22,
+  IPA_HW_v5_2 = 23,
 };
-#define IPA_HW_MAX (IPA_HW_v5_1 + 1)
+#define IPA_HW_MAX (IPA_HW_v5_2 + 1)
 #define IPA_HW_v4_0 IPA_HW_v4_0
 #define IPA_HW_v4_1 IPA_HW_v4_1
 #define IPA_HW_v4_2 IPA_HW_v4_2
@@ -589,6 +608,7 @@ enum ipa_hw_type {
 #define IPA_HW_v4_11 IPA_HW_v4_11
 #define IPA_HW_v5_0 IPA_HW_v5_0
 #define IPA_HW_v5_1 IPA_HW_v5_1
+#define IPA_HW_v5_2 IPA_HW_v5_2
 struct ipa_rule_attrib {
   uint32_t attrib_mask;
   uint16_t src_port_lo;
@@ -726,9 +746,13 @@ enum ipa_hdr_l2_type {
   IPA_HDR_L2_ETHERNET_II,
   IPA_HDR_L2_802_3,
   IPA_HDR_L2_802_1Q,
+  IPA_HDR_L2_ETHERNET_II_AST,
+  IPA_HDR_L2_802_1Q_AST,
 };
-#define IPA_HDR_L2_MAX (IPA_HDR_L2_802_1Q + 1)
+#define IPA_HDR_L2_MAX (IPA_HDR_L2_802_1Q_AST + 1)
 #define IPA_HDR_L2_802_1Q IPA_HDR_L2_802_1Q
+#define IPA_HDR_L2_ETHERNET_II_AST IPA_HDR_L2_ETHERNET_II_AST
+#define IPA_HDR_L2_802_1Q_AST IPA_HDR_L2_802_1Q_AST
 enum ipa_hdr_proc_type {
   IPA_HDR_PROC_NONE,
   IPA_HDR_PROC_ETHII_TO_ETHII,
@@ -743,8 +767,9 @@ enum ipa_hdr_proc_type {
   IPA_HDR_PROC_SET_DSCP,
   IPA_HDR_PROC_EoGRE_HEADER_ADD,
   IPA_HDR_PROC_EoGRE_HEADER_REMOVE,
+  IPA_HDR_PROC_WWAN_TO_ETHII_EX,
 };
-#define IPA_HDR_PROC_MAX (IPA_HDR_PROC_EoGRE_HEADER_REMOVE + 1)
+#define IPA_HDR_PROC_MAX (IPA_HDR_PROC_WWAN_TO_ETHII_EX + 1)
 struct ipa_rt_rule {
   enum ipa_client_type dst;
   uint32_t hdr_hdl;
@@ -814,7 +839,7 @@ struct IpaDscpVlanPcpMap_t {
   uint8_t dscp[IPA_EoGRE_MAX_VLAN][IPA_EoGRE_MAX_PCP_IDX];
   uint8_t num_vlan;
   uint8_t reserved0;
-} __packed;
+} __attribute__((__packed__));
 struct ipa_ipgre_info {
   enum ipa_ip_type iptype;
   uint32_t ipv4_src;
@@ -845,7 +870,15 @@ struct ipa_eogre_hdr_proc_ctx_params {
 struct ipa_eth_II_to_eth_II_ex_procparams {
   uint32_t input_ethhdr_negative_offset : 8;
   uint32_t output_ethhdr_negative_offset : 8;
-  uint32_t reserved : 16;
+  uint32_t output_dscp_pcp_update : 1;
+  uint32_t reserved : 15;
+};
+struct ipa_wwan_to_eth_II_ex_procparams {
+  uint32_t input_ethhdr_negative_offset : 8;
+  uint32_t output_ethhdr_negative_offset : 8;
+  uint32_t output_dscp_pcp_update : 1;
+  uint32_t input_ethhdr_valid : 1;
+  uint32_t reserved : 14;
 };
 #define L2TP_USER_SPACE_SPECIFY_DST_PIPE
 struct ipa_hdr_proc_ctx_add {
@@ -856,6 +889,7 @@ struct ipa_hdr_proc_ctx_add {
   struct ipa_l2tp_hdr_proc_ctx_params l2tp_params;
   struct ipa_eogre_hdr_proc_ctx_params eogre_params;
   struct ipa_eth_II_to_eth_II_ex_procparams generic_params;
+  struct ipa_wwan_to_eth_II_ex_procparams generic_params_v2;
 };
 #define IPA_L2TP_HDR_PROC_SUPPORT
 struct ipa_ioc_add_hdr_proc_ctx {
@@ -1241,6 +1275,11 @@ enum ipa_peripheral_ep_type {
   IPA_DATA_EP_TYP_BAM_DMUX = 5,
   IPA_DATA_EP_TYP_ETH,
 };
+enum ipa_data_ep_prot_type {
+  IPA_PROT_RMNET = 0,
+  IPA_PROT_RMNET_CV2X = 1,
+  IPA_PROT_MAX
+};
 struct ipa_ep_pair_info {
   __u32 consumer_pipe_num;
   __u32 producer_pipe_num;
@@ -1254,6 +1293,8 @@ struct ipa_ioc_get_ep_info {
   __u8 num_ep_pairs;
   __u16 padding;
   __u64 info;
+  enum ipa_data_ep_prot_type teth_prot;
+  __u8 teth_prot_valid;
 };
 struct ipa_set_pkt_threshold {
   uint8_t pkt_threshold_enable;
@@ -1277,17 +1318,22 @@ struct ipa_msg_meta {
 struct ipa_wlan_msg {
   char name[IPA_RESOURCE_NAME_MAX];
   uint8_t mac_addr[IPA_MAC_ADDR_SIZE];
+#define IPA_WDI_AST_UPDATE
+  uint8_t ast_update;
 };
 enum ipa_wlan_hdr_attrib_type {
   WLAN_HDR_ATTRIB_MAC_ADDR,
-  WLAN_HDR_ATTRIB_STA_ID
+  WLAN_HDR_ATTRIB_STA_ID,
+  WLAN_HDR_ATTRIB_TA_PEER_ID
 };
+#define WLAN_HDR_ATTRIB_TA_PEER_ID WLAN_HDR_ATTRIB_TA_PEER_ID
 struct ipa_wlan_hdr_attrib_val {
   enum ipa_wlan_hdr_attrib_type attrib_type;
   uint8_t offset;
   union {
     uint8_t mac_addr[IPA_MAC_ADDR_SIZE];
     uint8_t sta_id;
+    uint16_t ta_peer_id;
   } u;
 };
 struct ipa_wlan_msg_ex {
@@ -1452,10 +1498,12 @@ struct ipa_tether_device_info {
 enum ipa_vlan_ifaces {
   IPA_VLAN_IF_ETH,
   IPA_VLAN_IF_RNDIS,
-  IPA_VLAN_IF_ECM
+  IPA_VLAN_IF_ECM,
+  IPA_VLAN_IF_WLAN
 };
 #define IPA_VLAN_IF_EMAC IPA_VLAN_IF_ETH
-#define IPA_VLAN_IF_MAX (IPA_VLAN_IF_ECM + 1)
+#define IPA_VLAN_IF_WLAN IPA_VLAN_IF_WLAN
+#define IPA_VLAN_IF_MAX (IPA_VLAN_IF_WLAN + 1)
 struct ipa_ioc_get_vlan_mode {
   enum ipa_vlan_ifaces iface;
   uint32_t is_vlan_mode;
@@ -1564,6 +1612,21 @@ struct ipa_ioc_macsec_info {
   __u32 ioctl_data_size;
   __u32 padding;
 };
+enum ipa_ext_router_mode {
+  IPA_PREFIX_DISABLED = 0,
+  IPA_PREFIX_SHARING,
+  IPA_PREFIX_DELEGATION
+};
+struct ipa_ioc_ext_router_info {
+  enum ipa_ext_router_mode mode;
+  char pdn_name[IPA_RESOURCE_NAME_MAX];
+  uint32_t ipv6_addr[4];
+  uint32_t ipv6_mask[4];
+};
+struct ipa_ioc_dscp_pcp_map_info {
+  uint32_t add;
+  uint8_t dscp_pcp_map[IPA_UC_MAX_DSCP_VAL];
+};
 #define IPA_IOC_ADD_HDR _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_ADD_HDR, struct ipa_ioc_add_hdr *)
 #define IPA_IOC_DEL_HDR _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_DEL_HDR, struct ipa_ioc_del_hdr *)
 #define IPA_IOC_ADD_RT_RULE _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_ADD_RT_RULE, struct ipa_ioc_add_rt_rule *)
@@ -1650,6 +1713,7 @@ struct ipa_ioc_macsec_info {
 #define IPA_IOC_GET_PHERIPHERAL_EP_INFO _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_GET_PHERIPHERAL_EP_INFO, struct ipa_ioc_get_ep_info)
 #define IPA_IOC_ADD_UC_ACT_ENTRY _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_ADD_UC_ACT_ENTRY, union ipa_ioc_uc_activation_entry)
 #define IPA_IOC_DEL_UC_ACT_ENTRY _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_DEL_UC_ACT_ENTRY, __u16)
+#define IPA_IOC_QUERY_CACHED_DRIVER_MSG _IO(IPA_IOC_MAGIC, IPA_IOCTL_QUERY_CACHED_DRIVER_MSG)
 #define IPA_IOC_SET_SW_FLT _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_SET_SW_FLT, struct ipa_ioc_sw_flt_list_type)
 #define IPA_IOC_SET_PKT_THRESHOLD _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_SET_PKT_THRESHOLD, struct ipa_ioc_set_pkt_threshold)
 #define IPA_IOC_ADD_EoGRE_MAPPING _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_ADD_EoGRE_MAPPING, struct ipa_ioc_eogre_info)
@@ -1657,6 +1721,8 @@ struct ipa_ioc_macsec_info {
 #define IPA_IOC_SET_IPPT_SW_FLT _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_SET_IPPT_SW_FLT, struct ipa_ioc_sw_flt_list_type)
 #define IPA_IOC_ADD_MACSEC_MAPPING _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_ADD_MACSEC_MAPPING, struct ipa_ioc_macsec_info)
 #define IPA_IOC_DEL_MACSEC_MAPPING _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_DEL_MACSEC_MAPPING, struct ipa_ioc_macsec_info)
+#define IPA_IOC_SET_EXT_ROUTER_MODE _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_SET_EXT_ROUTER_MODE, struct ipa_ioc_ext_router_info)
+#define IPA_IOC_ADD_DEL_DSCP_PCP_MAPPING _IOWR(IPA_IOC_MAGIC, IPA_IOCTL_ADD_DEL_DSCP_PCP_MAPPING, struct ipa_ioc_dscp_pcp_map_info)
 #define TETH_BRIDGE_IOC_MAGIC 0xCE
 #define TETH_BRIDGE_IOCTL_SET_BRIDGE_MODE 0
 #define TETH_BRIDGE_IOCTL_SET_AGGR_PARAMS 1

@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef _UAPI_MSM_AUDIO_CALIBRATION_H
 #define _UAPI_MSM_AUDIO_CALIBRATION_H
 #include <linux/types.h>
@@ -363,16 +351,16 @@ union audio_cal_col_na {
   __u16 val16;
   __u32 val32;
   __u64 val64;
-} __packed;
+} __attribute__((__packed__));
 struct audio_cal_col {
   __u32 id;
   __u32 type;
   union audio_cal_col_na na_value;
-} __packed;
+} __attribute__((__packed__));
 struct audio_cal_col_data {
   __u32 num_columns;
   struct audio_cal_col column[MAX_VOICE_COLUMNS];
-} __packed;
+} __attribute__((__packed__));
 struct audio_cal_info_voc_col {
   __s32 table_id;
   __s32 tx_acdb_id;

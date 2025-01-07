@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef _UAPI_SPCOM_H_
 #define _UAPI_SPCOM_H_
 #include <linux/types.h>
@@ -51,26 +39,26 @@ enum spcom_poll_events {
 struct spcom_user_command {
   enum spcom_cmd_id cmd_id;
   __u32 arg;
-} __packed;
+} __attribute__((__packed__));
 struct spcom_send_command {
   enum spcom_cmd_id cmd_id;
   __u32 timeout_msec;
   __u32 buf_size;
   char buf[0];
-} __packed;
+} __attribute__((__packed__));
 struct spcom_user_create_channel_command {
   enum spcom_cmd_id cmd_id;
   char ch_name[SPCOM_CHANNEL_NAME_SIZE];
 #define SPCOM_IS_SHARABLE_SUPPORTED
   _Bool is_sharable;
-} __packed;
+} __attribute__((__packed__));
 #define SPCOM_USER_RESTART_SP_CMD
 struct spcom_user_restart_sp_command {
   enum spcom_cmd_id cmd_id;
   __u32 arg;
 #define SPCOM_IS_UPDATED_SUPPORETED
   __u32 is_updated;
-} __packed;
+} __attribute__((__packed__));
 #define SPCOM_MAX_ION_BUF 4
 struct spcom_ion_info {
   __s32 fd;
@@ -83,14 +71,14 @@ struct spcom_ion_handle {
 struct spcom_rmb_error_info {
   __u32 rmb_error;
   __u32 padding;
-} __packed;
+} __attribute__((__packed__));
 struct spcom_user_send_modified_command {
   enum spcom_cmd_id cmd_id;
   struct spcom_ion_info ion_info[SPCOM_MAX_ION_BUF];
   __u32 timeout_msec;
   __u32 buf_size;
   char buf[0];
-} __packed;
+} __attribute__((__packed__));
 enum {
   SPCOM_IONFD_CMD,
   SPCOM_POLL_CMD,
@@ -104,7 +92,7 @@ struct spcom_poll_param {
   _Bool wait;
   enum spcom_poll_cmd_id cmd_id;
   int retval;
-} __packed;
+} __attribute__((__packed__));
 #define SPCOM_IOCTL_MAGIC 'S'
 #define SPCOM_GET_IONFD _IOR(SPCOM_IOCTL_MAGIC, SPCOM_IONFD_CMD, struct spcom_ion_handle)
 #define SPCOM_SET_IONFD _IOW(SPCOM_IOCTL_MAGIC, SPCOM_IONFD_CMD, struct spcom_ion_handle)
@@ -133,42 +121,42 @@ enum spcom_ioctl_enum {
 struct spcom_dma_buf_info {
   __s32 fd;
   __u32 offset;
-} __packed;
+} __attribute__((__packed__));
 struct spcom_dma_buf_info_table {
   struct spcom_dma_buf_info info[SPCOM_MAX_DMA_BUF];
-} __packed;
+} __attribute__((__packed__));
 struct spcom_ioctl_poll_event {
   __u32 event_id;
   __u32 wait;
   __s32 retval;
   __u32 padding;
-} __packed;
+} __attribute__((__packed__));
 struct spcom_ioctl_ch {
   char ch_name[SPCOM_CHANNEL_NAME_SIZE];
-} __packed;
+} __attribute__((__packed__));
 struct spcom_ioctl_message {
   char ch_name[SPCOM_CHANNEL_NAME_SIZE];
   __u32 timeout_msec;
   __u32 buffer_size;
   char buffer[0];
-} __packed;
+} __attribute__((__packed__));
 struct spcom_ioctl_modified_message {
   char ch_name[SPCOM_CHANNEL_NAME_SIZE];
   __u32 timeout_msec;
   __u32 buffer_size;
   struct spcom_dma_buf_info info[SPCOM_MAX_DMA_BUF];
   char buffer[0];
-} __packed;
+} __attribute__((__packed__));
 struct spcom_ioctl_next_request_size {
   char ch_name[SPCOM_CHANNEL_NAME_SIZE];
   __u32 size;
   __u32 padding;
-} __packed;
+} __attribute__((__packed__));
 struct spcom_ioctl_dmabuf_lock {
   char ch_name[SPCOM_CHANNEL_NAME_SIZE];
   __s32 fd;
   __u32 padding;
-} __packed;
+} __attribute__((__packed__));
 #define SPCOM_IOCTL_STATE_POLL _IOWR(SPCOM_IOCTL_MAGIC, SPCOM_IOCTL_STATE_POLL_CMD, struct spcom_ioctl_poll_event)
 #define SPCOM_IOCTL_SHARED_CH_CREATE _IOW(SPCOM_IOCTL_MAGIC, SPCOM_IOCTL_SHARED_CH_CREATE_CMD, struct spcom_ioctl_ch)
 #define SPCOM_IOCTL_CH_REGISTER _IOW(SPCOM_IOCTL_MAGIC, SPCOM_IOCTL_CH_REGISTER_CMD, struct spcom_ioctl_ch)

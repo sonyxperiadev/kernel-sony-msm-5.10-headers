@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef __UAPI_LINUX_CAM_REQ_MGR_H
 #define __UAPI_LINUX_CAM_REQ_MGR_H
 #include <linux/videodev2.h>
@@ -50,6 +38,7 @@
 #define CAM_REQ_MGR_MAX_HANDLES 64
 #define CAM_REQ_MGR_MAX_HANDLES_V2 256
 #define MAX_LINKS_PER_SESSION 2
+#define CAM_RATE_LIMIT_INTERVAL_5SEC 5
 #define V4L_EVENT_CAM_REQ_MGR_EVENT (V4L2_EVENT_PRIVATE_START + 0)
 #define V4L_EVENT_CAM_REQ_MGR_SOF 0
 #define V4L_EVENT_CAM_REQ_MGR_ERROR 1

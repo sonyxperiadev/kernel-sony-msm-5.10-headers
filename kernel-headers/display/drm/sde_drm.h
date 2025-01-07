@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef _SDE_DRM_H_
 #define _SDE_DRM_H_
 #include <drm/drm.h>
@@ -43,12 +31,18 @@ extern "C" {
 #define DRM_FORMAT_MOD_QCOM_TIGHT fourcc_mod_code(QCOM, 0x4)
 #define DRM_FORMAT_MOD_QCOM_TILE fourcc_mod_code(QCOM, 0x8)
 #define DRM_FORMAT_MOD_QCOM_ALPHA_SWAP fourcc_mod_code(QCOM, 0x10)
+#define DRM_FORMAT_MOD_QCOM_FSC_TILE fourcc_mod_code(QCOM, 0x20)
 #define SDE_DRM_BLEND_OP_NOT_DEFINED 0
 #define SDE_DRM_BLEND_OP_OPAQUE 1
 #define SDE_DRM_BLEND_OP_PREMULTIPLIED 2
 #define SDE_DRM_BLEND_OP_COVERAGE 3
 #define SDE_DRM_BLEND_OP_MAX 4
 #define SDE_DRM_BLEND_OP_SKIP 5
+#define SDE_SYSCACHE_LLCC_DISP 0
+#define SDE_SYSCACHE_LLCC_DISP_LEFT 1
+#define SDE_SYSCACHE_LLCC_DISP_RIGHT 2
+#define SDE_INDEPENDENT_BUFFER_MODE 0
+#define SDE_SINGLE_BUFFER_MODE 1
 #define SDE_DRM_DEINTERLACE 0
 #define SDE_DRM_BITMASK_COUNT 64
 #define SDE_DRM_FB_NON_SEC 0
@@ -133,7 +127,7 @@ struct sde_drm_scaler_v2 {
   __u32 pre_downscale_y_0;
   __u32 pre_downscale_y_1;
 };
-#define SDE_MAX_DS_COUNT 2
+#define SDE_MAX_DS_COUNT 4
 #define SDE_DRM_DESTSCALER_ENABLE 0x1
 #define SDE_DRM_DESTSCALER_SCALE_UPDATE 0x2
 #define SDE_DRM_DESTSCALER_ENHANCER_UPDATE 0x4

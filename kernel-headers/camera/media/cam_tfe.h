@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef __UAPI_CAM_TFE_H__
 #define __UAPI_CAM_TFE_H__
 #include <media/cam_defs.h>
@@ -60,6 +48,7 @@
 #define CAM_ISP_TFE_GENERIC_BLOB_TYPE_CLOCK_CONFIG 1
 #define CAM_ISP_TFE_GENERIC_BLOB_TYPE_BW_CONFIG_V2 2
 #define CAM_ISP_TFE_GENERIC_BLOB_TYPE_CSID_CLOCK_CONFIG 3
+#define CAM_ISP_TFE_GENERIC_BLOB_TYPE_BW_LIMITER_CFG 16
 #define CAM_ISP_TFE_DSP_MODE_NONE 0
 #define CAM_ISP_TFE_DSP_MODE_ONE_WAY 1
 #define CAM_ISP_TFE_DSP_MODE_ROUND 2
@@ -221,6 +210,16 @@ struct cam_isp_tfe_acquire_hw_info {
   __u32 input_info_size;
   __u32 input_info_offset;
   __u64 data;
+};
+struct cam_isp_tfe_wm_bw_limiter_config {
+  __u32 res_type;
+  __u32 enable_limiter;
+  __u32 counter_limit[CAM_PACKET_MAX_PLANES];
+};
+struct cam_isp_tfe_out_rsrc_bw_limiter_config {
+  __u32 version;
+  __u32 num_ports;
+  struct cam_isp_tfe_wm_bw_limiter_config bw_limiter_config[1];
 };
 #define CAM_TFE_ACQUIRE_COMMON_VER0 0x1000
 #define CAM_TFE_ACQUIRE_COMMON_SIZE_VER0 0x0

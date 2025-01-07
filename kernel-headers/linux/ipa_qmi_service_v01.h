@@ -1,21 +1,9 @@
-/****************************************************************************
- ****************************************************************************
- ***
- ***   This header was automatically generated from a Linux kernel header
- ***   of the same name, to make information necessary for userspace to
- ***   call into the kernel available to libc.  It contains only constants,
- ***   structures, and macros generated from the original header, and thus,
- ***   contains no copyrightable information.
- ***
- ***   To edit the content of this header, modify the corresponding
- ***   source file (e.g. under external/kernel-headers/original/) then
- ***   run bionic/libc/kernel/tools/update_all.py
- ***
- ***   Any manual change here will be lost the next time this script will
- ***   be run. You've been warned!
- ***
- ****************************************************************************
- ****************************************************************************/
+/*
+ * This file is auto-generated. Modifications will be lost.
+ *
+ * See https://android.googlesource.com/platform/bionic/+/master/libc/kernel/
+ * for more information.
+ */
 #ifndef IPA_QMI_SERVICE_V01_H
 #define IPA_QMI_SERVICE_V01_H
 #include <linux/types.h>
@@ -34,6 +22,9 @@
 #define QMI_IPA_IPFLTR_NUM_MEQ_32_EQNS_V01 2
 #define QMI_IPA_MAX_PIPES_V01 20
 #define QMI_IPA_MAX_PER_CLIENTS_V01 64
+#define QMI_IPA_MAX_RMNET_ETH_INFO_V01 19
+#define QMI_IPA_MAX_MAC_ADDR_LEN_V01 6
+#define QMI_IPA_MAX_IPV4_ADDR_LEN_V01 4
 #define IPA_QMI_SUPPORTS_STATS
 #define IPA_QMI_SUPPORT_MHI_DEFAULT
 #define IPA_INT_MAX ((int) (~0U >> 1))
@@ -71,6 +62,13 @@ enum ipa_platform_type_enum_v01 {
   QMI_IPA_PLATFORM_TYPE_MSM_QNX_V01 = 5,
   QMI_IPA_PLATFORM_TYPE_LE_MHI_V01 = 6,
   IPA_PLATFORM_TYPE_ENUM_MAX_ENUM_VAL_V01 = 2147483647
+};
+enum ipa_eth_hw_config_enum_v01 {
+  IPA_QMI_ETH_HW_CONFIG_ENUM_MIN_ENUM_VAL_V01 = - 2147483647,
+  IPA_QMI_ETH_HW_NONE_V01 = 0x00,
+  IPA_QMI_ETH_HW_VLAN_IP_V01 = 0x01,
+  IPA_QMI_ETH_HW_NON_VLAN_IP_V01 = 0x02,
+  IPA_QMI_ETH_HW_CONFIG_ENUM_MAX_ENUM_VAL_V01 = 2147483647
 };
 #define QMI_IPA_PLATFORM_TYPE_LE_MHI_V01 QMI_IPA_PLATFORM_TYPE_LE_MHI_V01
 struct ipa_hdr_tbl_info_type_v01 {
@@ -172,6 +170,8 @@ struct ipa_indication_reg_req_msg_v01 {
   __u8 endpoint_desc_ind;
   __u8 bw_change_ind_valid;
   __u8 bw_change_ind;
+  __u8 rmnet_eth_mac_info_valid;
+  __u8 rmnet_eth_mac_info;
 };
 struct ipa_indication_reg_resp_msg_v01 {
   struct ipa_qmi_response_type_v01 resp;
@@ -746,6 +746,7 @@ enum ipa_ic_type_enum_v01 {
   DATA_IC_TYPE_AP_V01 = 0x04,
   DATA_IC_TYPE_Q6_V01 = 0x05,
   DATA_IC_TYPE_UC_V01 = 0x06,
+  DATA_IC_TYPE_ETH_V01 = 0x07,
   IPA_IC_TYPE_ENUM_MAX_VAL_V01 = IPA_INT_MAX,
 };
 enum ipa_ep_status_type_v01 {
@@ -857,6 +858,28 @@ struct ipa_move_nat_table_complt_ind_msg_v01 {
   struct ipa_qmi_response_type_v01 nat_table_move_status;
 };
 #define QMI_IPA_NAT_TABLE_MOVE_COMPLETE_IND_MAX_MSG_LEN_V01 7
+struct ipa_eth_backhaul_info_req_msg_v01 {
+  __u8 src_mac_addr[QMI_IPA_MAX_MAC_ADDR_LEN_V01];
+  __u8 dst_mac_addr[QMI_IPA_MAX_MAC_ADDR_LEN_V01];
+  __u32 ipv4_addr_eth0[QMI_IPA_MAX_IPV4_ADDR_LEN_V01];
+  __u8 eth_pipe;
+  __u8 enable;
+};
+#define IPA_ETH_BACKHAUL_INFO_REQ_MSG_V01_MAX_MSG_LEN 45
+struct ipa_eth_backhaul_info_resp_msg_v01 {
+  struct ipa_qmi_response_type_v01 resp;
+};
+#define IPA_ETH_BACKHAUL_INFO_RESP_MSG_V01_MAX_MSG_LEN 7
+struct ipa_rmnet_eth_info_type_v01 {
+  __u8 mac_addr[QMI_IPA_MAX_MAC_ADDR_LEN_V01];
+  __u32 mux_id;
+};
+struct ipa_rmnet_eth_info_indication_msg_v01 {
+  __u8 rmnet_eth_info_valid;
+  __u32 rmnet_eth_info_len;
+  struct ipa_rmnet_eth_info_type_v01 rmnet_eth_info[QMI_IPA_MAX_RMNET_ETH_INFO_V01];
+};
+#define IPA_RMNET_ETH_INFO_INDICATION_MSG_V01_MAX_MSG_LEN 194
 #define QMI_IPA_INDICATION_REGISTER_REQ_V01 0x0020
 #define QMI_IPA_INDICATION_REGISTER_RESP_V01 0x0020
 #define QMI_IPA_INIT_MODEM_DRIVER_REQ_V01 0x0021
@@ -914,7 +937,10 @@ struct ipa_move_nat_table_complt_ind_msg_v01 {
 #define QMI_IPA_MOVE_NAT_REQ_V01 0x0046
 #define QMI_IPA_MOVE_NAT_RESP_V01 0x0046
 #define QMI_IPA_MOVE_NAT_COMPLETE_IND_V01 0x0046
-#define QMI_IPA_INIT_MODEM_DRIVER_REQ_MAX_MSG_LEN_V01 210
+#define QMI_IPA_ETH_BACKHAUL_INFO_REQ_V01 0x0047
+#define QMI_IPA_ETH_BACKHAUL_INFO_RESP_V01 0x0047
+#define QMI_IPA_RMNET_ETH_INFO_INDICATION_V01 0x0048
+#define QMI_IPA_INIT_MODEM_DRIVER_REQ_MAX_MSG_LEN_V01 197
 #define QMI_IPA_INIT_MODEM_DRIVER_RESP_MAX_MSG_LEN_V01 25
 #define QMI_IPA_INDICATION_REGISTER_REQ_MAX_MSG_LEN_V01 16
 #define QMI_IPA_INDICATION_REGISTER_RESP_MAX_MSG_LEN_V01 7
