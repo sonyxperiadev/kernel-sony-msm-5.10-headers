@@ -74,24 +74,24 @@ TECHPACK_AUDIO_UAPI_HEADERS="\
     sound/wcd-dsp-glink.h"
 
 TECHPACK_CAMERA_UAPI_HEADERS="\
-    camera/media/cam_cpas.h\
-    camera/media/cam_cre.h\
-    camera/media/cam_custom.h\
-    camera/media/cam_defs.h\
-    camera/media/cam_fd.h\
-    camera/media/cam_icp.h\
-    camera/media/cam_isp.h\
-    camera/media/cam_isp_ife.h\
-    camera/media/cam_isp_sfe.h\
-    camera/media/cam_isp_tfe.h\
-    camera/media/cam_isp_vfe.h\
-    camera/media/cam_jpeg.h\
-    camera/media/cam_lrme.h\
-    camera/media/cam_ope.h\
-    camera/media/cam_req_mgr.h\
-    camera/media/cam_sensor.h\
-    camera/media/cam_sync.h\
-    camera/media/cam_tfe.h"
+    media/cam_cpas.h\
+    media/cam_cre.h\
+    media/cam_custom.h\
+    media/cam_defs.h\
+    media/cam_fd.h\
+    media/cam_icp.h\
+    media/cam_isp.h\
+    media/cam_isp_ife.h\
+    media/cam_isp_sfe.h\
+    media/cam_isp_tfe.h\
+    media/cam_isp_vfe.h\
+    media/cam_jpeg.h\
+    media/cam_lrme.h\
+    media/cam_ope.h\
+    media/cam_req_mgr.h\
+    media/cam_sensor.h\
+    media/cam_sync.h\
+    media/cam_tfe.h"
 
 TECHPACK_DISPLAY_UAPI_HEADERS="\
     display/drm/msm_drm_pp.h\
@@ -133,7 +133,7 @@ process_headers "$UAPI_HEADERS" "uapi/" ""
 
 process_headers "$TECHPACK_AUDIO_UAPI_HEADERS" "../techpack/audio/include/uapi/audio/" ""
 
-process_headers "$TECHPACK_CAMERA_UAPI_HEADERS" "../techpack/camera/include/uapi/" ""
+process_headers "$TECHPACK_CAMERA_UAPI_HEADERS" "../techpack/camera/include/uapi/camera/" ""
 
 process_headers "$TECHPACK_DISPLAY_UAPI_HEADERS" "../techpack/display/include/uapi/" ""
 
