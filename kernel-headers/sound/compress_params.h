@@ -11,6 +11,7 @@
 #define MAX_NUM_CODEC_DESCRIPTORS 32
 #define MAX_NUM_BITRATES 32
 #define MAX_NUM_SAMPLE_RATES 32
+#define COMPRESSED_TIMESTAMP_FLAG 0x0001
 #define SND_AUDIOCODEC_PCM ((__u32) 0x00000001)
 #define SND_AUDIOCODEC_MP3 ((__u32) 0x00000002)
 #define SND_AUDIOCODEC_AMR ((__u32) 0x00000003)
@@ -27,7 +28,12 @@
 #define SND_AUDIOCODEC_BESPOKE ((__u32) 0x0000000E)
 #define SND_AUDIOCODEC_ALAC ((__u32) 0x0000000F)
 #define SND_AUDIOCODEC_APE ((__u32) 0x00000010)
-#define SND_AUDIOCODEC_MAX SND_AUDIOCODEC_APE
+#define SND_AUDIOCODEC_TRUEHD ((__u32) 0x00001001)
+#define SND_AUDIOCODEC_MP2 ((__u32) 0x00001006)
+#define SND_AUDIOCODEC_AC3 ((__u32) 0x00001008)
+#define SND_AUDIOCODEC_DTS ((__u32) 0x0000100A)
+#define SND_AUDIOCODEC_EAC3 ((__u32) 0x0000100B)
+#define SND_AUDIOCODEC_MAX SND_AUDIOCODEC_EAC3
 #define SND_AUDIOPROFILE_PCM ((__u32) 0x00000001)
 #define SND_AUDIOCHANMODE_MP3_MONO ((__u32) 0x00000001)
 #define SND_AUDIOCHANMODE_MP3_STEREO ((__u32) 0x00000002)
@@ -225,6 +231,13 @@ struct snd_codec {
   __u32 format;
   __u32 align;
   union snd_codec_options options;
-  __u32 reserved[3];
+  __u32 flags;
+  __u32 reserved[2];
 } __attribute__((packed, aligned(4)));
+struct snd_codec_metadata {
+  __u32 length;
+  __u32 offset;
+  __u64 timestamp;
+  __u32 reserved[4];
+};
 #endif
