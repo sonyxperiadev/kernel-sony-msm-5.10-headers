@@ -66,7 +66,41 @@ TECHPACK_AUDIO_UAPI_HEADERS="\
     linux/wcd-spi-ac-params.h\
     sound/audio_compressed_formats.h\
     sound/audio_effects.h\
-    sound/audio_slimslave.h
+    sound/audio_slimslave.h\
+    sound/devdep_params.h\
+    sound/lsm_params.h\
+    sound/msmcal-hwdep.h\
+    sound/voice_params.h\
+    sound/wcd-dsp-glink.h"
+
+TECHPACK_AUDIO_LEGACY_UAPI_HEADERS="\
+    linux/mfd/wcd9xxx/wcd9xxx_registers.h\
+    linux/mfd/wcd9xxx/wcd9320_registers.h\
+    linux/avtimer.h\
+    linux/msm_audio.h\
+    linux/msm_audio_aac.h\
+    linux/msm_audio_ac3.h\
+    linux/msm_audio_alac.h\
+    linux/msm_audio_amrnb.h\
+    linux/msm_audio_amrwb.h\
+    linux/msm_audio_amrwbplus.h\
+    linux/msm_audio_ape.h\
+    linux/msm_audio_ar.h\
+    linux/msm_audio_calibration.h\
+    linux/msm_audio_g711.h\
+    linux/msm_audio_g711_dec.h\
+    linux/msm_audio_mvs.h\
+    linux/msm_audio_qcp.h\
+    linux/msm_audio_sbc.h\
+    linux/msm_audio_voicememo.h\
+    linux/msm_audio_wma.h\
+    linux/msm_audio_wmapro.h\
+    linux/wcd-spi-ac-params.h\
+    sound/audio_compressed_formats.h\
+    sound/audio_effects.h\
+    sound/audio_slimslave.h\
+    sound/compress_offload.h\
+    sound/compress_params.h\
     sound/devdep_params.h\
     sound/lsm_params.h\
     sound/msmcal-hwdep.h\
@@ -132,6 +166,8 @@ process_headers "$LINUX_HEADERS" "" ""
 process_headers "$UAPI_HEADERS" "uapi/" ""
 
 process_headers "$TECHPACK_AUDIO_UAPI_HEADERS" "../techpack/audio/include/uapi/audio/" ""
+
+process_headers "$TECHPACK_AUDIO_LEGACY_UAPI_HEADERS" "../techpack/audio/legacy/include/uapi/audio/" "legacy/"
 
 process_headers "$TECHPACK_CAMERA_UAPI_HEADERS" "../techpack/camera/include/uapi/camera/" ""
 
